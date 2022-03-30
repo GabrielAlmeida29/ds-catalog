@@ -18,14 +18,14 @@ public class Category implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nameString;
+	private String name;
 	
 	Category() {
 	}
 
-	public Category(Long id, String nameString) {
+	public Category(Long id, String name) {
 		this.id = id;
-		this.nameString = nameString;
+		this.name = name;
 	}
 
 	public Long getId() {
@@ -36,12 +36,12 @@ public class Category implements Serializable{
 		this.id = id;
 	}
 
-	public String getNameString() {
-		return nameString;
+	public String getName() {
+		return name;
 	}
 
-	public void setNameString(String nameString) {
-		this.nameString = nameString;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
