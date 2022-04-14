@@ -63,7 +63,6 @@ public class Category implements Serializable{
 		return updatedAt;
 	}
 	
-	//Métodos que salvam a criação de uma classe e a última atualização dela
 	@PrePersist
 	public void prePersist() {
 		createdAt = Instant.now();

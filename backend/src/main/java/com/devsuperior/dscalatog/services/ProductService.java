@@ -59,8 +59,7 @@ public class ProductService {
 			copyDtoToEntity(dto, entity);
 			entity = repository.save(entity);
 			return new ProductDTO(entity);
-		} 
-		catch (EntityNotFoundException e) {
+		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("ID Not Found! ID: " + id);
 		}
 	}
@@ -68,11 +67,9 @@ public class ProductService {
 	public void delete(Long id) {
 		try {
 			repository.deleteById(id);
-		} 
-		catch(EmptyResultDataAccessException e) {
+		}catch(EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("ID Not Found! ID: " + id );
-		}
-		catch(DataIntegrityViolationException e) {
+		}catch(DataIntegrityViolationException e) {
 			throw new DatabaseException("Integrity Violation!");
 		}
 	}
