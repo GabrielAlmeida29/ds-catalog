@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.dscalatog.dto.ProductDTO;
 import com.devsuperior.dscalatog.repositories.ProductRepository;
 import com.devsuperior.dscalatog.services.exceptions.ResourceNotFoundException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @Transactional
