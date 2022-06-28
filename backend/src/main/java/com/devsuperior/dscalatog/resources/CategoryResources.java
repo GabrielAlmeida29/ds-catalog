@@ -23,8 +23,6 @@ import com.devsuperior.dscalatog.services.CategoryService;
 @RequestMapping(value = "/categories")
 public class CategoryResources {
 
-	//END POINT = ROTAS DE RESPOSTA
-	
 	@Autowired
 	private CategoryService service;
 	
