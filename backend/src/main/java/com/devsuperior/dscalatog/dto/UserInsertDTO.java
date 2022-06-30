@@ -1,10 +1,13 @@
 package com.devsuperior.dscalatog.dto;
 
-public class UserInsertDTO extends UserDTO{
+import javax.validation.constraints.Positive;
+
+public class UserInsertDTO extends UserDTO {
 	private static final long serialVersionUID = 1L;
-	
+
+	@Positive(message = "Preço deve ser um valor ")
 	private String password;
-	
+
 	UserInsertDTO() {
 		super();
 	}
