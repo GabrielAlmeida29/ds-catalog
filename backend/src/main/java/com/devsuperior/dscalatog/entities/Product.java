@@ -36,11 +36,11 @@ public class Product implements Serializable {
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant date;
 	
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant createdAt;
+	//@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	//private Instant createdAt;
 	
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant updatedAt;
+	//@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	//private Instant updatedAt;
 	
 	@ManyToMany
 	@JoinTable(name = "tb_product_category", 
@@ -113,15 +113,15 @@ public class Product implements Serializable {
 		return categories;
 	}
 	
-	@PrePersist
-	public void prePersist() {
-		createdAt = Instant.now();
-	}
+	//@PrePersist
+	//public void prePersist() {
+	//	createdAt = Instant.now();
+	//}
 	
-	@PreUpdate
-	public void preUpadate() {
-		updatedAt = Instant.now();
-	}
+	//@PreUpdate
+	//public void preUpadate() {
+	//	updatedAt = Instant.now();
+	//}
 
 	@Override
 	public int hashCode() {
