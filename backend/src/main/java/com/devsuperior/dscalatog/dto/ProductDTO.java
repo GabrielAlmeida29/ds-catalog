@@ -1,4 +1,4 @@
-package com.devsuperior.dscalatog.dto;
+ package com.devsuperior.dscalatog.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
