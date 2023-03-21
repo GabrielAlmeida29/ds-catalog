@@ -1,5 +1,6 @@
 package com.devsuperior.dscalatog.services;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
@@ -76,6 +77,8 @@ public class ProductServiceTests {
 		when(repository.findById(validId)).thenReturn(Optional.of(product));
 		when(repository.findById(invalidId)).thenReturn(Optional.empty());
 		
+		when(repository.find(any(), any(), any())).thenReturn(page);
+		
 		when(repository.save(ArgumentMatchers.any())).thenReturn(product);
 		
 		when(repository.getOne(validId)).thenReturn(product);
@@ -119,12 +122,11 @@ public class ProductServiceTests {
 	@Test
 	public void findAllPagedShouldReturnPage() {
 		
-		Pageable pageable = PageRequest.of(0, 10);
+		Pageable pageable = PageRequest.of(0, 12);
 		
-		Page<ProductDTO> result = service.findAllPaged(pageable);
+		Page<ProductDTO> result = service.findAllPaged(0L, "", (PageRequest) pageable);
 		
 		Assertions.assertNotNull(result);
-		verify(repository, times(1)).findAll(pageable);
 	}
 	
 	@Test

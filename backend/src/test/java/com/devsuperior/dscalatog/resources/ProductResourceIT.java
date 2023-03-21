@@ -17,25 +17,35 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.dscalatog.dto.ProductDTO;
 import com.devsuperior.dscalatog.tests.Factory;
+import com.devsuperior.dscalatog.tests.TokenUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
 public class ProductResourceIT {
-
+	
 	@Autowired
 	private MockMvc mockMvc;
 	
 	@Autowired
 	private ObjectMapper objectMapper;
+	
+	@Autowired
+	private TokenUtil tokenUtil;
 
 	private Long validId;
 	private Long invalidId;
 	private Long countTotalProducts;
+	private String username;
+	private String password;
 
 	@BeforeEach
 	void setUp() throws Exception {
+		
+		username = "maria@gmail.com";
+		password = "123456";
+		
 		validId = 1L;
 		invalidId = 100L;
 		countTotalProducts = 25L;
@@ -55,14 +65,19 @@ public class ProductResourceIT {
 	@Test
 	public void updateShouldReturnProductDTOWhenIdExist() throws Exception {
 
+		String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
+		
 		ProductDTO productDTO = Factory.createProductDTO();
 		String jsonBody = objectMapper.writeValueAsString(productDTO);
 		
 		String expectedName = productDTO.getName();
 		String expectedDescription = productDTO.getDescription();
 
-		ResultActions result = mockMvc.perform(put("/products/{id} ", validId).content(jsonBody)
-				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
+		ResultActions result = mockMvc.perform(put("/products/{id} ", validId)
+				.header("Authorization", "Bearer" + accessToken)
+				.content(jsonBody)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON));
 
 		result.andExpect(status().isOk());
 		result.andExpect(jsonPath("$.id").value(validId));
